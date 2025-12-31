@@ -6,6 +6,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: -webkit-fill-available;
 }
 
 body {
@@ -14,6 +15,7 @@ body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     color: white;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
 
 /* ============ SCREENS ============ */
@@ -23,6 +25,7 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,6 +34,7 @@ body {
     transition: opacity 1.2s ease;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     overflow: hidden;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .screen.active {
@@ -48,12 +52,14 @@ body {
     overflow-x: hidden;
     display: block;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 
 #wish.active {
     display: block;
     padding: 20px;
-    padding-bottom: 100px;
+    padding-bottom: calc(100px + env(safe-area-inset-bottom));
+    padding-top: calc(20px + env(safe-area-inset-top));
 }
 
 .content {
@@ -956,13 +962,21 @@ body {
 }
 
 /* ============ RESPONSIVE ============ */
+/* ============ MOBILE OPTIMIZATION ============ */
+
+/* Tablet devices */
 @media (max-width: 768px) {
-    .rose-plant {
-        height: 320px;
+    .rose-video {
+        width: clamp(180px, 45vw, 280px);
+    }
+    
+    .rose-wrapper {
+        padding-top: 30px;
+        padding-bottom: 20px;
     }
     
     .wish-card {
-        margin: 0 10px;
+        margin: 0 15px;
         padding: 25px 20px;
     }
     
@@ -973,84 +987,393 @@ body {
     .special-message-box {
         padding: 20px;
     }
+    
+    .magic-button {
+        padding: 16px 40px;
+        font-size: 16px;
+        min-width: 180px;
+    }
+    
+    .subtitle {
+        font-size: clamp(16px, 4vw, 22px);
+    }
+    
+    .happy-new-year {
+        font-size: clamp(32px, 8vw, 50px);
+    }
+    
+    .year-badge {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .year-text {
+        font-size: 18px;
+    }
+    
+    .floating-hearts .float-heart {
+        font-size: 18px;
+    }
 }
 
+/* Mobile phones */
 @media (max-width: 480px) {
     .glowing-text {
-        font-size: 70px;
+        font-size: clamp(55px, 18vw, 70px);
+    }
+    
+    .subtitle {
+        font-size: 16px;
+        padding: 0 20px;
     }
     
     .gift-box {
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
+        margin-bottom: 30px;
     }
     
-    .rose-plant {
-        height: 240px;
-        width: 150px;
+    .rose-video {
+        width: clamp(160px, 55vw, 220px);
+        border-radius: 15px;
     }
     
-    .wish-item {
-        padding: 10px 12px;
-        margin: 8px 0;
-        gap: 10px;
+    .rose-wrapper {
+        padding-top: 20px;
+        padding-bottom: 15px;
     }
     
-    .wish-item p {
-        font-size: 14px;
+    .rose-message {
+        font-size: clamp(18px, 5vw, 26px);
+        margin-top: 15px;
+        padding: 0 15px;
     }
     
-    .special-message-box {
-        padding: 18px;
-        margin: 20px 0;
+    .rose-glow {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .rose-sparkles {
+        gap: 20px;
+    }
+    
+    .sparkle {
+        font-size: 16px;
+    }
+    
+    .wishes-container {
+        padding: 15px 10px;
+    }
+    
+    .year-badge {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .year-text {
+        font-size: 15px;
+    }
+    
+    .happy-new-year {
+        font-size: clamp(28px, 7vw, 40px);
+        margin-bottom: 15px;
     }
     
     .wish-card {
         padding: 20px 15px;
         border-radius: 20px;
+        margin: 0 10px;
+    }
+    
+    .card-header {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .wish-title {
+        font-size: clamp(20px, 5.5vw, 30px);
+    }
+    
+    .header-decoration {
+        font-size: 16px;
+    }
+    
+    .wishes-list {
+        gap: 10px;
+        margin: 20px 0;
+    }
+    
+    .wish-item {
+        padding: 12px 14px;
+        margin: 0;
+        gap: 10px;
+        border-radius: 12px;
+    }
+    
+    .wish-icon {
+        font-size: 18px;
+    }
+    
+    .wish-item p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .special-message-box {
+        padding: 16px;
+        margin: 20px 0;
+        border-radius: 15px;
+    }
+    
+    .special-message {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    .signature-area {
+        margin-top: 20px;
+    }
+    
+    .signature {
+        font-size: 16px;
+    }
+    
+    .magic-button {
+        padding: 14px 32px;
+        font-size: 15px;
+        min-width: 160px;
+        border-radius: 30px;
     }
     
     .footer {
-        padding: 25px 15px 20px;
+        padding: 20px 15px 15px;
+        margin-top: 25px;
     }
     
     .footer-text {
         font-size: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .footer-year {
+        font-size: 11px;
+    }
+    
+    .footer-stars span {
+        font-size: 12px;
+    }
+    
+    .floating-hearts .float-heart {
+        font-size: 14px;
+    }
+    
+    /* Fix for touch devices - larger tap targets */
+    .magic-button {
+        min-height: 50px;
+        touch-action: manipulation;
     }
 }
 
+/* Very small phones */
+@media (max-width: 360px) {
+    .glowing-text {
+        font-size: 50px;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+    }
+    
+    .gift-box {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .rose-video {
+        width: 150px;
+    }
+    
+    .rose-message {
+        font-size: 16px;
+    }
+    
+    .happy-new-year {
+        font-size: 26px;
+    }
+    
+    .wish-title {
+        font-size: 18px;
+    }
+    
+    .wish-item p {
+        font-size: 12px;
+    }
+    
+    .wish-icon {
+        font-size: 16px;
+    }
+    
+    .year-badge {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .year-text {
+        font-size: 13px;
+    }
+    
+    .special-message {
+        font-size: 13px;
+    }
+    
+    .footer-text {
+        font-size: 11px;
+    }
+}
+
+/* Short height devices */
 @media (max-height: 700px) {
     .rose-wrapper {
-        padding-top: 20px;
+        padding-top: 15px;
+        padding-bottom: 10px;
     }
     
-    .rose-plant {
-        height: 220px;
-    }
-}
-
-/* Landscape orientation */
-@media (orientation: landscape) and (max-height: 500px) {
-    .rose-wrapper {
-        padding-top: 10px;
+    .rose-video {
+        width: clamp(140px, 35vw, 200px);
     }
     
-    .rose-plant {
-        height: 180px;
-        width: 140px;
+    .rose-message {
+        margin-top: 10px;
     }
     
     .wishes-container {
         padding-top: 10px;
     }
     
+    .year-badge {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    
     .happy-new-year {
-        font-size: 35px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .wishes-list {
+        gap: 8px;
+    }
+    
+    .wish-item {
+        padding: 10px 12px;
+    }
+}
+
+/* Landscape orientation on phones */
+@media (orientation: landscape) and (max-height: 500px) {
+    #wish {
+        padding-top: 10px;
+    }
+    
+    .rose-wrapper {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    
+    .rose-video {
+        width: clamp(100px, 25vw, 150px);
+    }
+    
+    .rose-message {
+        font-size: 16px;
+        margin-top: 8px;
+    }
+    
+    .rose-glow {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .wishes-container {
+        padding: 5px 15px;
+    }
+    
+    .year-badge {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .year-text {
+        font-size: 12px;
+    }
+    
+    .happy-new-year {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    
+    .wish-card {
+        padding: 15px;
+    }
+    
+    .wishes-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .wish-item {
+        padding: 8px 10px;
+    }
+    
+    .wish-item p {
+        font-size: 12px;
+    }
+    
+    .special-message-box {
+        padding: 12px;
+        margin: 15px 0;
     }
     
     .footer {
-        padding: 20px 15px 15px;
-        margin-top: 30px;
+        padding: 15px 10px 10px;
+        margin-top: 15px;
+    }
+    
+    .floating-hearts .float-heart {
+        font-size: 12px;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .screen {
+        min-height: -webkit-fill-available;
+    }
+    
+    .rose-video {
+        -webkit-transform: translateZ(0);
+    }
+}
+
+/* Improve touch scrolling */
+.screen {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text selection on buttons */
+.magic-button {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
